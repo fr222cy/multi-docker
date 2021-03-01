@@ -1,0 +1,38 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "movie-app",
+      "image": "rydberg123/movie-app",
+      "hostname": "movie-app",
+      "essential": true,
+      "environment": [
+        {
+          "name": "MOVIE_APP_DATABASE_HOST",
+          "value": "mongodb"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort" : 80,
+          "containerPort": 8080
+        }
+      ],
+      "links": ["mongodb"],
+      "memory": 128
+    },
+    {
+      "name": "mongodb",
+      "image": "mongo",
+      "hostname": "mongodb",
+      "essential": false,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort" : 27017,
+          "containerPort": 27017
+        }
+      ]
+    }
+  ]
+}

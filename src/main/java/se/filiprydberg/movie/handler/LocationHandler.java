@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import se.filiprydberg.movie.model.FilmingLocation;
 import se.filiprydberg.movie.model.Location;
-import se.filiprydberg.movie.model.LocationNotFoundException;
+import se.filiprydberg.movie.model.exception.LocationNotFoundException;
 import se.filiprydberg.movie.model.Movie;
 import se.filiprydberg.movie.service.BingService;
 import se.filiprydberg.movie.service.ImdbService;

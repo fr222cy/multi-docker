@@ -3,7 +3,6 @@ package se.filiprydberg.movie.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,13 +15,10 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
 
-    @Autowired
-    private Environment environment;
+    private final String jwtSecret;
 
-    private final String SECRET;
-
-    public JwtUtil() {
-        SECRET = environment.getProperty("movie-app.jwt.secret");
+    public JwtUtil(Environment environment) {
+        jwtSecret = environment.getProperty("movie-app.jwt.secret");
     }
 
     public String extractUsername(String token) {
@@ -39,7 +35,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -59,7 +55,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
     }
 

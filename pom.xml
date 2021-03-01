@@ -11,7 +11,7 @@
 	<groupId>se.filiprydberg</groupId>
 	<artifactId>movie-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movie-app</name>
+	<name>Movie :: App</name>
 	<description>Test project for AWS</description>
 	<properties>
 		<java.version>11</java.version>

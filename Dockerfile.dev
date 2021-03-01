@@ -1,3 +1,0 @@
-FROM openjdk:11
-COPY target/movie-app.jar movie-app.jar
-CMD ["java", "-jar", "movie-app.jar"]
