@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_ROOT_USERNAME=admin
+    ports:
+      - 27017:27017
+  movie-app:
+    ports:
+      - 8080:8080
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    volumes:
+      -  /app/target/
+      -  ./:/app
+    environment:
+      - MOVIE_APP_DATABASE_HOST=mongodb
